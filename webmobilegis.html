@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Mobile GIS Projects</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        .section {
+            padding: 4rem 2rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+            font-size: 2.5rem;
+        }
+
+        .section-description {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .slider-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slider-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+        }
+
+        .slider-btn {
+            background: rgba(255, 255, 255, 0.7);
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 18px;
+            transition: background 0.3s;
+        }
+
+        .slider-btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: #ccc;
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .dot.active {
+            background: #2c3e50;
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 2rem 1rem;
+            }
+
+            .slide {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="section">
+        <h2 class="section-title">Web GIS Development</h2>
+        <p class="section-description">
+            Specialized in developing sophisticated web-based Geographic Information Systems that enable users to visualize, analyze, and interact with spatial data through intuitive interfaces. Our solutions combine modern web technologies with powerful GIS capabilities.
+        </p>
+        <div class="slider-container">
+            <div class="slider" id="slider1">
+                <div class="slide" style="background-image: url('https://source.unsplash.com/random/800x400?map')"></div>
+                <div class="slide" style="background-image: url('https://source.unsplash.com/random/801x400?gis')"></div>
+                <div class="slide" style="background-image: url('https://source.unsplash.com/random/802x400?geography')"></div>
+            </div>
+            <div class="slider-buttons">
+                <button class="slider-btn prev" onclick="moveSlide('slider1', -1)">❮</button>
+                <button class="slider-btn next" onclick="moveSlide('slider1', 1)">❯</button>
+            </div>
+            <div class="dots" id="dots1"></div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Mobile GIS Applications</h2>
+        <p class="section-description">
+            Creating powerful mobile applications that bring GIS capabilities to your fingertips. Our mobile solutions enable field data collection, real-time mapping, and location-based services with seamless offline functionality.
+        </p>
+        <div class="slider-container">
+            <div class="slider" id="slider2">
+                <div class="slide" style="background-image: url('https://source.unsplash.com/random/800x400?mobile-app')"></div>
+                <div class="slide" style="background-image: url('https://source.unsplash.com/random/801x400?smartphone')"></div>
+                <div class="slide" style="background-image: url('https://source.unsplash.com/random/802x400?navigation')"></div>
+            </div>
+            <div class="slider-buttons">
+                <button class="slider-btn prev" onclick="moveSlide('slider2', -1)">❮</button>
+                <button class="slider-btn next" onclick="moveSlide('slider2', 1)">❯</button>
+            </div>
+            <div class="dots" id="dots2"></div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Spatial Analysis Tools</h2>
+        <p class="section-description">
+            Delivering advanced spatial analysis tools that transform raw geographic data into actionable insights. Our custom analysis solutions help organizations make data-driven decisions with confidence.
+        </p>
+        <div class="slider-container">
+            <div class="slider" id="slider3">
+                <div class="slide" style="background-image: url('https://source.unsplash.com/random/800x400?data-analysis')"></div>
+                <div class="slide" style="background-image: url('https://source.unsplash.com/random/801x400?analytics')"></div>
+                <div class="slide" style="background-image: url('https://source.unsplash.com/random/802x400?technology')"></div>
+            </div>
+            <div class="slider-buttons">
+                <button class="slider-btn prev" onclick="moveSlide('slider3', -1)">❮</button>
+                <button class="slider-btn next" onclick="moveSlide('slider3', 1)">❯</button>
+            </div>
+            <div class="dots" id="dots3"></div>
+        </div>
+    </section>
+
+    <script>
+        const sliders = {
+            slider1: { current: 0, total: 3 },
+            slider2: { current: 0, total: 3 },
+            slider3: { current: 0, total: 3 }
+        };
+
+        // Initialize dots for all sliders
+        Object.keys(sliders).forEach(sliderId => {
+            const dotsContainer = document.getElementById(`dots${sliderId.slice(-1)}`);
+            for (let i = 0; i < sliders[sliderId].total; i++) {
+                const dot = document.createElement('div');
+                dot.className = `dot ${i === 0 ? 'active' : ''}`;
+                dot.onclick = () => goToSlide(sliderId, i);
+                dotsContainer.appendChild(dot);
+            }
+        });
+
+        function updateDots(sliderId) {
+            const dots = document.querySelectorAll(`#dots${sliderId.slice(-1)} .dot`);
+            dots.forEach((dot, index) => {
+                dot.className = `dot ${index === sliders[sliderId].current ? 'active' : ''}`;
+            });
+        }
+
+        function moveSlide(sliderId, direction) {
+            const slider = sliders[sliderId];
+            slider.current = (slider.current + direction + slider.total) % slider.total;
+            
+            const sliderElement = document.getElementById(sliderId);
+            sliderElement.style.transform = `translateX(-${slider.current * 100}%)`;
+            
+            updateDots(sliderId);
+        }
+
+        function goToSlide(sliderId, index) {
+            sliders[sliderId].current = index;
+            const sliderElement = document.getElementById(sliderId);
+            sliderElement.style.transform = `translateX(-${index * 100}%)`;
+            updateDots(sliderId);
+        }
+
+        // Auto-advance slides every 5 seconds
+        Object.keys(sliders).forEach(sliderId => {
+            setInterval(() => moveSlide(sliderId, 1), 5000);
+        });
+    </script>
+</body>
+</html>
